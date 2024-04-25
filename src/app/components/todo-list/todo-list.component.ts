@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { TodoService } from '../../api-service/todo.service';
 import { RespGetTodo } from '../../api-service/modals/GetTodo';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-todo-list',
@@ -10,11 +11,11 @@ import { RespGetTodo } from '../../api-service/modals/GetTodo';
 export class TodoListComponent implements OnInit {
   userList: RespGetTodo[] = [];
 
-  constructor(private todoService: TodoService) {}
+  private router = inject(Router);
+  private todoService = inject(TodoService);
 
   ngOnInit(): void {
     this.getUser();
-    this.getUserById(1);
   }
 
   getUser() {
@@ -27,12 +28,8 @@ export class TodoListComponent implements OnInit {
     });
   }
 
-  getUserById(id: number) {
-    this.todoService.GetTodoById(id).subscribe({
-      next: (resp) => {
-        console.log(id);
-      },
-      error: () => {},
-    });
+  onClickDetail(item: RespGetTodo) {
+    localStorage.setItem('todo', JSON.stringify(item));
+    this.router.navigate(['/todos', item.id, 'detail']);
   }
 }

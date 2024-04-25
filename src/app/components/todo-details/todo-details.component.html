@@ -1,0 +1,9 @@
+<!-- {{ localTodo | json }} -->
+
+<div class="row">
+  <div class="col-3">Title</div>
+  <div class="col-3">{{ todo?.title ?? "" }}</div>
+
+  <div class="col-3">Is Complete</div>
+  <div class="col-3">{{ todo?.completed ?? null }}</div>
+</div>
