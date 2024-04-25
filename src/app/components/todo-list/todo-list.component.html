@@ -1,0 +1,24 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Title</th>
+      <th scope="col">Completed</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of userList">
+      <th scope="row">{{ item.id }}</th>
+      <td>{{ item.title }}</td>
+      <td
+        [ngClass]="{
+          complete: item.completed != null && !item.completed,
+          incomplete: item.completed != null && item.completed
+        }"
+        [ngStyle]="{ color: item.completed ? 'yellow' : 'rgba(255,255,255,1)' }"
+      >
+        {{ item.completed ? "Completed" : "Incomplete" }}
+      </td>
+    </tr>
+  </tbody>
+</table>
