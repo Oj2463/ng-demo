@@ -1,0 +1,51 @@
+{
+  "todos": [
+    {
+      "id": "1",
+      "title": "HAPPY",
+      "completed": true
+    },
+    {
+      "id": "2",
+      "title": "quis ut nam facilis et officia qui",
+      "completed": false
+    },
+    {
+      "id": "3",
+      "title": "fugiat veniam minus",
+      "completed": true
+    }
+  ],
+  "users": [
+    {
+      "id": "1",
+      "name": "Leanne Graham",
+      "username": "Bret",
+      "password": "111111"
+    },
+    {
+      "id": "2103",
+      "name": "omdevsinh",
+      "username": "ojads",
+      "password": "134311"
+    },
+    {
+      "id": "6b38",
+      "name": "wdefa",
+      "username": "adssad",
+      "password": "dadsad"
+    },
+    {
+      "id": "dd08",
+      "name": "dsadsa",
+      "username": "dsadsa",
+      "password": "sdadsdsa"
+    },
+    {
+      "id": "a8c9",
+      "name": "aaa",
+      "username": "dsadsa1",
+      "password": "sdfsdfsadfs"
+    }
+  ]
+}

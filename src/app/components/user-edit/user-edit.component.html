@@ -1,0 +1,38 @@
+<div *ngIf="userList">
+  <div class="mb-3">
+    <label for="Title" class="form-label">Name</label>
+    <input
+      class="form-control"
+      name="name"
+      id="name"
+      type="text"
+      [(ngModel)]="name"
+    />
+  </div>
+  <div class="mb-3">
+    <label for="Title" class="form-label">Username</label>
+    <input
+      class="form-control"
+      name="uname"
+      id="uname"
+      type="text"
+      [(ngModel)]="username"
+    />
+  </div>
+  <div class="mb-3">
+    <label for="Title" class="form-label">Password</label>
+    <input
+      class="form-control"
+      name="password"
+      id="password"
+      type="text"
+      [(ngModel)]="password"
+    />
+  </div>
+  <div class="mb-3">
+    <a class="btn btn-primary" [href]="'/user'"> Back </a>
+    <button type="submit" class="btn btn-primary" (click)="onClickUpdate()">
+      Save
+    </button>
+  </div>
+</div>

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { RespGetTodo } from './modals/GetTodo';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -15,7 +16,21 @@ export class TodoService {
     return this.http.get<RespGetTodo[]>(`${this.API_URL}/todos`);
   }
 
-  GetTodoById(id: number) {
+  GetTodoById(id: string) {
     return this.http.get<RespGetTodo>(`${this.API_URL}/todos/${id}`);
+  }
+
+  createTodo(title: string, completed: boolean) {
+    const data = { title, completed };
+    return this.http.post(`${this.API_URL}/todos`, data);
+  }
+
+  deleteTodo(id: string) {
+    return this.http.delete(`${this.API_URL}/todos/${id}`);
+  }
+
+  updateTodo(id: string, title: string, completed: boolean) {
+    const data = { title, completed };
+    return this.http.patch(`${this.API_URL}/todos/${id}`, data);
   }
 }

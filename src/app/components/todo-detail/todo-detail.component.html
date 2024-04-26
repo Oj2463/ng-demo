@@ -1,0 +1,20 @@
+<div *ngIf="todo">
+  <div class="mb-3">
+    <label for="Title" class="form-label">Title</label>
+    <input
+      class="form-control"
+      type="text"
+      readonly
+      disabled
+      [value]="todo.title"
+    />
+  </div>
+  <div class="mb-3">
+    <label for="IsCompleted" class="form-label">IsCompleted?</label>
+    <input type="checkbox" readonly disabled [value]="todo.completed" />
+  </div>
+  <div class="mb-3">
+    <a class="btn btn-primary" [href]="'/todos'"> Back </a>
+    <a class="btn btn-primary" [href]="'/todos/edit/' + todo.id"> Edit </a>
+  </div>
+</div>

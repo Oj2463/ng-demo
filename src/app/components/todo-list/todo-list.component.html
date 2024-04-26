@@ -1,3 +1,6 @@
+<div>
+  <a type="button" class="btn btn-primary" href="todos/add">Add</a>
+</div>
 <table class="table table-striped">
   <thead>
     <tr>
@@ -7,7 +10,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let item of userList">
+    <tr *ngFor="let item of todoList">
       <th scope="row">{{ item.id }}</th>
       <td>{{ item.title }}</td>
       <td
@@ -18,6 +21,29 @@
         [ngStyle]="{ color: item.completed ? 'yellow' : 'rgba(255,255,255,1)' }"
       >
         {{ item.completed ? "Completed" : "Incomplete" }}
+      </td>
+      <td>
+        <button
+          type="button"
+          class="btn btn-primary"
+          (click)="onClickDetail(item)"
+        >
+          Detail
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          (click)="onClickUpdate(item)"
+        >
+          Update
+        </button>
+        <button
+          type="button"
+          class="btn btn-danger"
+          (click)="onClickDelete(item)"
+        >
+          Delete
+        </button>
       </td>
     </tr>
   </tbody>

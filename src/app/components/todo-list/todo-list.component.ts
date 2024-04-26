@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { TodoService } from '../../api-service/todo.service';
 import { RespGetTodo } from '../../api-service/modals/GetTodo';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-todo-list',
@@ -8,31 +10,45 @@ import { RespGetTodo } from '../../api-service/modals/GetTodo';
   styleUrls: ['./todo-list.component.scss'],
 })
 export class TodoListComponent implements OnInit {
-  userList: RespGetTodo[] = [];
-
-  constructor(private todoService: TodoService) {}
+  private router = inject(Router);
+  private todoService = inject(TodoService);
+  private toastr = inject(ToastrService);
 
   ngOnInit(): void {
-    this.getUser();
-    this.getUserById(1);
+    this.getTodo();
+    //this.getUserById(1);
   }
+  todoList: RespGetTodo[] = [];
 
-  getUser() {
-    this.userList = [];
+  getTodo() {
+    this.todoList = [];
     this.todoService.GetTodo().subscribe({
       next: (resp) => {
-        this.userList = resp;
+        this.todoList = resp;
       },
-      error: () => {},
+      error: () => {
+        this.toastr.error('Something went wrong', 'Error');
+      },
     });
   }
 
-  getUserById(id: number) {
-    this.todoService.GetTodoById(id).subscribe({
+  onClickDetail(item: RespGetTodo) {
+    this.router.navigate(['/todos', 'detail', item.id]);
+  }
+
+  onClickUpdate(item: RespGetTodo) {
+    this.router.navigate(['/todos', 'edit', item.id]);
+  }
+
+  onClickDelete(item: RespGetTodo) {
+    this.todoService.deleteTodo(item.id).subscribe({
       next: (resp) => {
-        console.log(id);
+        this.toastr.success('Record deleted successfully');
+        this.getTodo();
       },
-      error: () => {},
+      error: () => {
+        this.toastr.error('Something went wrong', 'Error');
+      },
     });
   }
 }
