@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -6,7 +7,5 @@ import { Component, OnInit } from '@angular/core';
   styleUrl: './app.component.scss',
 })
 export class AppComponent implements OnInit {
-  constructor() {}
-
   ngOnInit(): void {}
 }

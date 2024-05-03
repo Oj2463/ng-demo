@@ -1,0 +1,35 @@
+<div class="col-md-6 offset-md-3 mt-5">
+  <div class="card">
+    <div class="card-body">
+      <form [formGroup]="loginform">
+        <div class="mb-3">
+          <label class="form-label">Username</label>
+          <input type="text" formControlName="username" class="form-control" />
+          <div *ngIf="submitted && f['username'].errors">
+            <div *ngIf="f['username'].errors['required']" class="text-danger">
+              Username is required
+            </div>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Password</label>
+          <input
+            type="password"
+            formControlName="password"
+            class="form-control"
+          />
+          <div *ngIf="submitted && f['password'].errors">
+            <div *ngIf="f['password'].errors['required']" class="text-danger">
+              Password is required
+            </div>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary" (click)="onLogin()">
+          Login</button
+        ><br />
+        <label>No Account?</label>
+        <a href="account/register">Register</a>
+      </form>
+    </div>
+  </div>
+</div>

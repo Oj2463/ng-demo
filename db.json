@@ -1,4 +1,9 @@
 {
+  "roles": [
+    { "id": "1", "name": "Admin" },
+    { "id": "2", "name": "Staff" },
+    { "id": "3", "name": "User" }
+  ],
   "todos": [
     {
       "id": "1",
@@ -21,31 +26,36 @@
       "id": "1",
       "name": "Leanne Graham",
       "username": "Bret",
-      "password": "111111"
+      "password": "1111110",
+      "role": "1"
     },
     {
       "id": "2103",
       "name": "omdevsinh",
       "username": "ojads",
-      "password": "134311"
+      "password": "134311",
+      "role": "2"
     },
     {
       "id": "6b38",
       "name": "wdefa",
       "username": "adssad",
-      "password": "dadsad"
+      "password": "dadsad",
+      "role": "3"
     },
     {
       "id": "dd08",
       "name": "dsadsa",
       "username": "dsadsa",
-      "password": "sdadsdsa"
+      "password": "sdadsdsa",
+      "role": "1"
     },
     {
-      "id": "a8c9",
-      "name": "aaa",
-      "username": "dsadsa1",
-      "password": "sdfsdfsadfs"
+      "id": "c5f6",
+      "name": "omdevsinh",
+      "username": "oj",
+      "password": "oj1234",
+      "role": "2"
     }
   ]
 }

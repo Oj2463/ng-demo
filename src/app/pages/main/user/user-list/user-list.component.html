@@ -1,0 +1,34 @@
+<div>
+  <a type="button" class="btn btn-primary" href="user/add">Add</a>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Name</th>
+      <th scope="col">Username</th>
+      <th scope="col">Password</th>
+      <th scope="col">Role</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of userList">
+      <th scope="row">{{ item.id }}</th>
+      <td>{{ item.name }}</td>
+      <td>{{ item.username }}</td>
+      <td>{{ item.password }}</td>
+      <td>{{ item.RoleName || "" }}</td>
+      <td>
+        <a class="btn btn-primary" [href]="'/user/detail/' + item.id">Detail</a>
+        <a class="btn btn-primary" [href]="'/user/edit/' + item.id">Update</a>
+        <button
+          type="button"
+          class="btn btn-danger"
+          (click)="onClickDelete(item)"
+        >
+          Delete
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>

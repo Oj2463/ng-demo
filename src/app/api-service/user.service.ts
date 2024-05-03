@@ -43,4 +43,10 @@ export class UserService {
         })
       );
   }
+
+  loginUser(username: string, password: string) {
+    return this.http.get<RespGetUser[]>(
+      `${this.API_URL}/users?username=${username}&password=${password}`
+    );
+  }
 }
