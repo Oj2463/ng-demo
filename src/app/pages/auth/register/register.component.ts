@@ -51,15 +51,26 @@ export class RegisterComponent implements OnInit {
     this.userService.checkIfUsernameExists(data.username || '').subscribe({
       next: (isExist) => {
         if (!isExist) {
-          this.userService.createUser(data).subscribe({
-            next: () => {
-              this.toastr.success('Record created successfully');
-              this.router.navigate(['/user']);
-            },
-            error: (err: HttpErrorResponse) => {
-              this.toastr.error(err?.error ?? 'Something went wrong', 'Error');
-            },
-          });
+          this.userService
+            .createUser({
+              id: '',
+              role: '3',
+              name: data.name || '',
+              password: data.password || '',
+              username: data.username || '',
+            })
+            .subscribe({
+              next: () => {
+                this.toastr.success('Record created successfully');
+                this.router.navigate(['/user']);
+              },
+              error: (err: HttpErrorResponse) => {
+                this.toastr.error(
+                  err?.error ?? 'Something went wrong',
+                  'Error'
+                );
+              },
+            });
         } else {
           this.toastr.error('Username already exists', 'Error');
         }

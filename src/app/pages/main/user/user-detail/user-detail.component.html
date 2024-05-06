@@ -30,6 +30,16 @@
     />
   </div>
   <div class="mb-3">
+    <label for="Title" class="form-label">Role</label>
+    <input
+      class="form-control"
+      type="text"
+      readonly
+      disabled
+      [value]="userList.RoleName"
+    />
+  </div>
+  <div class="mb-3">
     <a class="btn btn-primary" [href]="'/user'"> Back </a>
     <a class="btn btn-primary" [href]="'/user/edit/' + userList.id"> Edit </a>
   </div>

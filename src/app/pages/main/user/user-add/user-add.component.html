@@ -9,7 +9,7 @@
         id="name"
         formControlName="name"
       />
-      <div *ngIf="f['name'].errors">
+      <div *ngIf="submitted && f['name'].errors">
         <div *ngIf="f['name'].errors['required']" class="text-danger">
           Name is required
         </div>
@@ -24,7 +24,7 @@
         id="username"
         formControlName="username"
       />
-      <div *ngIf="f['username'].errors">
+      <div *ngIf="submitted && f['username'].errors">
         <div *ngIf="f['username'].errors['required']" class="text-danger">
           Username is required
         </div>
@@ -47,12 +47,26 @@
         required
         pattern="[a-zA-Z0-9@#]*"
       />
-      <div *ngIf="f['password'].errors">
+      <div *ngIf="submitted && f['password'].errors">
         <div *ngIf="f['password'].errors['required']" class="text-danger">
           Password is required
         </div>
         <div *ngIf="f['password'].errors['minlength']" class="text-danger">
           Password must be at least 6 characters
+        </div>
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="role" class="form-label">Role</label>
+      <select id="role" class="form-select" formControlName="role">
+        <option value="" selected>Select User Role...</option>
+        <option *ngFor="let item of roles | async" [value]="item.id">
+          {{ item.name }}
+        </option>
+      </select>
+      <div *ngIf="submitted && f['role'].errors">
+        <div *ngIf="f['role'].errors['required']" class="text-danger">
+          role is required
         </div>
       </div>
     </div>

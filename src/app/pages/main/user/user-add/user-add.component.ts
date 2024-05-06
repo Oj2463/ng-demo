@@ -12,7 +12,9 @@ import {
   ValidationErrors,
 } from '@angular/forms';
 import { RespGetUser } from '../../../../api-service/modals/RespGetUser';
-import { map, Observable } from 'rxjs';
+import { catchError, map, Observable, of } from 'rxjs';
+import { RoleService } from '../../../../api-service/role.service';
+import { Role } from '../../../../api-service/modals/Role';
 
 export function checkIfUsernameExists(idKey: string): AsyncValidatorFn {
   const userService = inject(UserService);
@@ -39,8 +41,10 @@ export class UserAddComponent implements OnInit {
   private userService = inject(UserService);
   private router = inject(Router);
   private toastr = inject(ToastrService);
+  private roleService = inject(RoleService);
 
   userList: RespGetUser[] = [];
+  submitted = false;
 
   userformgroup = new FormGroup({
     name: new FormControl('', Validators.required),
@@ -53,7 +57,10 @@ export class UserAddComponent implements OnInit {
       Validators.required,
       Validators.minLength(6),
     ]),
+    role: new FormControl('', Validators.required),
   });
+
+  roles = this.roleService.GetRole().pipe(catchError((x) => of([] as Role[])));
 
   ngOnInit() {
     this.GetUser();
@@ -64,6 +71,7 @@ export class UserAddComponent implements OnInit {
   }
 
   onClickAdd() {
+    this.submitted = true;
     if (!this.validateForm()) {
       return;
     }
@@ -72,15 +80,26 @@ export class UserAddComponent implements OnInit {
     this.userService.checkIfUsernameExists(data.username || '').subscribe({
       next: (isExist) => {
         if (!isExist) {
-          this.userService.createUser(data).subscribe({
-            next: () => {
-              this.toastr.success('Record created successfully');
-              this.router.navigate(['/user']);
-            },
-            error: (err: HttpErrorResponse) => {
-              this.toastr.error(err?.error ?? 'Something went wrong', 'Error');
-            },
-          });
+          this.userService
+            .createUser({
+              id: '',
+              role: data.role || '',
+              name: data.name || '',
+              password: data.password || '',
+              username: data.username || '',
+            })
+            .subscribe({
+              next: () => {
+                this.toastr.success('Record created successfully');
+                this.router.navigate(['/user']);
+              },
+              error: (err: HttpErrorResponse) => {
+                this.toastr.error(
+                  err?.error ?? 'Something went wrong',
+                  'Error'
+                );
+              },
+            });
         } else {
           this.toastr.error('Username already exists', 'Error');
         }
@@ -89,7 +108,7 @@ export class UserAddComponent implements OnInit {
   }
 
   validateForm() {
-    var { name, password, username } = this.userformgroup.value;
+    var { name, password, username, role } = this.userformgroup.value;
 
     if ((name || '').trim() == '') {
       return false;
@@ -107,6 +126,10 @@ export class UserAddComponent implements OnInit {
       return false;
     }
     if ((password || '').length < 6) {
+      return false;
+    }
+
+    if ((role || '').trim() == '') {
       return false;
     }
 

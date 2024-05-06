@@ -1,8 +1,17 @@
 {
   "roles": [
-    { "id": "1", "name": "Admin" },
-    { "id": "2", "name": "Staff" },
-    { "id": "3", "name": "User" }
+    {
+      "id": "1",
+      "name": "Admin"
+    },
+    {
+      "id": "2",
+      "name": "Staff"
+    },
+    {
+      "id": "3",
+      "name": "User"
+    }
   ],
   "todos": [
     {
@@ -27,7 +36,7 @@
       "name": "Leanne Graham",
       "username": "Bret",
       "password": "1111110",
-      "role": "1"
+      "role": "3"
     },
     {
       "id": "2103",
@@ -56,6 +65,20 @@
       "username": "oj",
       "password": "oj1234",
       "role": "2"
+    },
+    {
+      "id": "c185",
+      "role": "3",
+      "name": "gh",
+      "password": "qqqqqq",
+      "username": "qqqqqq"
+    },
+    {
+      "id": "edfb",
+      "role": "2",
+      "name": "oj",
+      "password": "oj1234",
+      "username": "adsk"
     }
   ]
 }

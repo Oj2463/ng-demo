@@ -20,12 +20,14 @@ export class UserService {
     return this.http.get<RespGetUser>(`${this.API_URL}/users/${id}`);
   }
 
-  createUser(data: object) {
-    return this.http.post(`${this.API_URL}/users`, data);
+  createUser(data: RespGetUser) {
+    const { id, ...rest } = data;
+    return this.http.post(`${this.API_URL}/users`, rest);
   }
 
-  updateUser(id: string, data: object) {
-    return this.http.patch(`${this.API_URL}/users/${id}`, data);
+  updateUser(data: RespGetUser) {
+    const { id, ...rest } = data;
+    return this.http.patch(`${this.API_URL}/users/${id}`, rest);
   }
 
   deleteUser(id: string) {

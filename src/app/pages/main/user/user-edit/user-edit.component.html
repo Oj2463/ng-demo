@@ -1,4 +1,4 @@
-<div *ngIf="userList">
+<div *ngIf="id.trim() != ''">
   <div class="mb-3">
     <label for="Title" class="form-label">Name</label>
     <input
@@ -28,6 +28,15 @@
       type="text"
       [(ngModel)]="password"
     />
+  </div>
+  <div class="mb-3">
+    <label for="role" class="form-label">Role</label>
+    <select id="role" class="form-select" [(ngModel)]="role">
+      <option value="" selected>Select User Role...</option>
+      <option *ngFor="let item of roles | async" [value]="item.id">
+        {{ item.name }}
+      </option>
+    </select>
   </div>
   <div class="mb-3">
     <a class="btn btn-primary" [href]="'/user'"> Back </a>
