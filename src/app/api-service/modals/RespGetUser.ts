@@ -1,7 +1,7 @@
 export interface RespGetUser {
-  id: string;
+  id: number;
   name: string;
   username: string;
   password: string;
-  role: string;
+  roleId: number;
 }

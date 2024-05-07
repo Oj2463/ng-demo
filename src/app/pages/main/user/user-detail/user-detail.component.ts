@@ -23,17 +23,17 @@ export class UserDetailComponent implements OnInit {
 
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id') ?? '';
-    this.GetUserById(id);
+    this.GetUserById(+id);
   }
 
-  GetUserById(id: string) {
+  GetUserById(id: number) {
     this.userService.GetUserById(id).subscribe({
       next: (resp) => {
         this.userList = resp;
         if (this.userList) {
-          this.roleService.GetRoleById(this.userList.role).subscribe({
+          this.roleService.GetRoleById(this.userList.roleId).subscribe({
             next: (resp1) => {
-              this.userList!.RoleName = resp1.name;
+              this.userList!.RoleName = resp1.roleName;
             },
           });
         }

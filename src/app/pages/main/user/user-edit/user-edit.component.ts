@@ -20,27 +20,27 @@ export class UserEditComponent implements OnInit {
   private toastr = inject(ToastrService);
   private roleService = inject(RoleService);
 
-  id: string = '';
+  id?: number;
   name: string = '';
   username: string = '';
   password: string = '';
-  role: string = '';
+  role?: number;
 
   roles = this.roleService.GetRole().pipe(catchError((x) => of([] as Role[])));
 
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id') ?? '';
-    this.GetUserById(id);
+    this.GetUserById(+id);
   }
 
-  GetUserById(id: string) {
+  GetUserById(id: number) {
     this.userService.GetUserById(id).subscribe({
       next: (resp) => {
         this.id = resp.id;
         this.name = resp.name;
         this.username = resp.username;
         this.password = resp.password;
-        this.role = resp.role;
+        this.role = resp.roleId;
       },
       error: () => {
         this.toastr.error('Something went wrong', 'Error');
@@ -50,11 +50,11 @@ export class UserEditComponent implements OnInit {
 
   onClickUpdate() {
     var dataobj: RespGetUser = {
-      id: this.id,
+      id: this.id || 0,
       name: this.name,
       username: this.username,
       password: this.password,
-      role: this.role,
+      roleId: this.role || 0,
     };
     this.userService.updateUser(dataobj).subscribe({
       next: (resp) => {

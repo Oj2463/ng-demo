@@ -42,13 +42,13 @@ export class UserListComponent implements OnInit, OnDestroy {
           this.userList = resp;
 
           const obs = this.userList.map((x) =>
-            this.roleService.GetRoleById(x.role)
+            this.roleService.GetRoleById(x.roleId)
           );
 
           forkJoin(obs).subscribe({
             next: (resp1) => {
               resp1.forEach((x, i) => {
-                this.userList[i].RoleName = x.name;
+                this.userList[i].RoleName = x.roleName;
               });
             },
           });

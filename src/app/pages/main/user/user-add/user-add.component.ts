@@ -48,11 +48,10 @@ export class UserAddComponent implements OnInit {
 
   userformgroup = new FormGroup({
     name: new FormControl('', Validators.required),
-    username: new FormControl(
-      '',
-      [Validators.required, Validators.minLength(3)],
-      [checkIfUsernameExists('')]
-    ),
+    username: new FormControl('', [
+      Validators.required,
+      Validators.minLength(3),
+    ]),
     password: new FormControl('', [
       Validators.required,
       Validators.minLength(6),
@@ -77,13 +76,13 @@ export class UserAddComponent implements OnInit {
     }
 
     var data = this.userformgroup.value;
-    this.userService.checkIfUsernameExists(data.username || '').subscribe({
+    this.userService.checkIfUsernameExists(data.username || '', 0).subscribe({
       next: (isExist) => {
         if (!isExist) {
           this.userService
             .createUser({
-              id: '',
-              role: data.role || '',
+              id: 0,
+              roleId: parseInt(data.role || ''),
               name: data.name || '',
               password: data.password || '',
               username: data.username || '',

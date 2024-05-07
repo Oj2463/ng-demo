@@ -61,7 +61,7 @@
       <select id="role" class="form-select" formControlName="role">
         <option value="" selected>Select User Role...</option>
         <option *ngFor="let item of roles | async" [value]="item.id">
-          {{ item.name }}
+          {{ item.roleName }}
         </option>
       </select>
       <div *ngIf="submitted && f['role'].errors">
@@ -74,7 +74,6 @@
       <a class="btn btn-primary" [href]="'/user'"> Back </a>
       <button
         type="submit"
-        [disabled]="!userformgroup.valid"
         class="btn btn-primary"
         (click)="onClickAdd()"
       >

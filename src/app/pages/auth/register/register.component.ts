@@ -53,8 +53,8 @@ export class RegisterComponent implements OnInit {
         if (!isExist) {
           this.userService
             .createUser({
-              id: '',
-              role: '3',
+              id: 0,
+              roleId: 3,
               name: data.name || '',
               password: data.password || '',
               username: data.username || '',

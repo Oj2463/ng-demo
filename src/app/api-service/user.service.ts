@@ -8,36 +8,36 @@ import { map } from 'rxjs';
   providedIn: 'root',
 })
 export class UserService {
-  private readonly API_URL = environment.API_URL;
+  private readonly API_URL = environment.CrudApi;
 
   constructor(private http: HttpClient) {}
 
   GetUser() {
-    return this.http.get<RespGetUser[]>(`${this.API_URL}/users`);
+    return this.http.get<RespGetUser[]>(`${this.API_URL}/Users`);
   }
 
-  GetUserById(id: string) {
-    return this.http.get<RespGetUser>(`${this.API_URL}/users/${id}`);
+  GetUserById(id: number) {
+    return this.http.get<RespGetUser>(`${this.API_URL}/Users/${id}`);
   }
 
   createUser(data: RespGetUser) {
     const { id, ...rest } = data;
-    return this.http.post(`${this.API_URL}/users`, rest);
+    return this.http.post(`${this.API_URL}/Users/0`, rest);
   }
 
   updateUser(data: RespGetUser) {
     const { id, ...rest } = data;
-    return this.http.patch(`${this.API_URL}/users/${id}`, rest);
+    return this.http.post(`${this.API_URL}/Users/${id}`, rest);
   }
 
-  deleteUser(id: string) {
-    return this.http.delete(`${this.API_URL}/users/${id}`);
+  deleteUser(id: number) {
+    return this.http.delete(`${this.API_URL}/Users/${id}`);
   }
 
-  checkIfUsernameExists(username: string, id: string = '') {
+  checkIfUsernameExists(username: string, id?: number) {
     return this.http
       .get<RespGetUser[]>(
-        `${this.API_URL}/users?username=${username}&id_ne=${id}`
+        `${this.API_URL}/Users/UserExists/${username}?id=${id}`
       )
       .pipe(
         map((data) => {
@@ -48,7 +48,7 @@ export class UserService {
 
   loginUser(username: string, password: string) {
     return this.http.get<RespGetUser[]>(
-      `${this.API_URL}/users?username=${username}&password=${password}`
+      `${this.API_URL}/Users/username=${username}&password=${password}`
     );
   }
 }

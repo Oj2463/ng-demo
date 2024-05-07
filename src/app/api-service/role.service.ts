@@ -9,15 +9,15 @@ import { Role } from './modals/Role';
   providedIn: 'root',
 })
 export class RoleService {
-  private readonly API_URL = environment.API_URL;
+  private readonly API_URL = environment.CrudApi;
 
   constructor(private http: HttpClient) {}
 
   GetRole() {
-    return this.http.get<Role[]>(`${this.API_URL}/roles`);
+    return this.http.get<Role[]>(`${this.API_URL}/Roles`);
   }
 
-  GetRoleById(id: string) {
-    return this.http.get<Role>(`${this.API_URL}/roles/${id}`);
+  GetRoleById(id: number) {
+    return this.http.get<Role>(`${this.API_URL}/Roles/${id}`);
   }
 }
