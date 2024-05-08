@@ -35,20 +35,17 @@ export class UserService {
   }
 
   checkIfUsernameExists(username: string, id?: number) {
-    return this.http
-      .get<RespGetUser[]>(
-        `${this.API_URL}/Users/UserExists/${username}?id=${id}`
-      )
-      .pipe(
-        map((data) => {
-          return data.length > 0;
-        })
-      );
+    const data = { username, id };
+    return this.http.post(`${this.API_URL}/Users/UserExists`, data);
+    // .pipe(
+    //   map((data) => {
+    //     return data.length > 0;
+    //   })
+    // );
   }
 
   loginUser(username: string, password: string) {
-    return this.http.get<RespGetUser[]>(
-      `${this.API_URL}/Users/username=${username}&password=${password}`
-    );
+    const data = { username, password };
+    return this.http.post(`${this.API_URL}/Users/Login`, data);
   }
 }

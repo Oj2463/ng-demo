@@ -10,6 +10,7 @@ import {
 } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
 import { StorageService } from '../../../services/storage.service';
+import { RespGetUser } from '../../../api-service/modals/RespGetUser';
 
 @Component({
   selector: 'app-login',
@@ -48,8 +49,10 @@ export class LoginComponent implements OnInit {
       .loginUser(data.username || '', data.password || '')
       .subscribe({
         next: (resp) => {
-          if (resp.length > 0) {
-            this.storage.LoggedUser.set(resp[0]);
+          if (resp) {
+            //console.log(resp);
+            const respAsUser: RespGetUser = resp as RespGetUser;
+            this.storage.LoggedUser.set(respAsUser);
 
             this.toastr.success('Login Successfull');
             this.router.navigate(['/users']);

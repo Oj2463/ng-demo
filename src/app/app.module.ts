@@ -23,6 +23,7 @@ import { NavbarComponent } from './layouts/home-layout/navbar/navbar.component';
 import { HomeComponent } from './pages/main/home/home.component';
 import { LoginLayoutComponent } from './layouts/login-layout/login-layout.component';
 import { HomeLayoutComponent } from './layouts/home-layout/home-layout.component';
+import { TodoGridEditComponent } from './pages/main/todo/todo-grid-edit/todo-grid-edit.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { HomeLayoutComponent } from './layouts/home-layout/home-layout.component
     RegisterComponent,
     NavbarComponent,
     HomeComponent,
+    TodoGridEditComponent,
   ],
   imports: [
     BrowserModule,
